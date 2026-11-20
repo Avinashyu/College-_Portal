@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Dashboard | College Portal</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'student/auth.css' %}">
+</head>
+<body>
+    <main class="page-shell dashboard-shell">
+        <header class="dashboard-header">
+            <a class="wordmark" href="{% url 'home' %}">College Portal</a>
+            <span class="account-chip">
+                <span class="status-dot" aria-hidden="true"></span>
+                Signed in
+            </span>
+        </header>
+
+        <section class="dashboard-card" aria-labelledby="page-title">
+            <div class="dashboard-icon" aria-hidden="true">✦</div>
+            <p class="eyebrow">Your account</p>
+            <h1 id="page-title">Welcome, {{ request.user.username }}</h1>
+            <p class="intro">You’re signed in and ready to use the College Portal.</p>
+
+            <div class="account-panel">
+                <span class="avatar" aria-hidden="true">{{ request.user.username|first|upper }}</span>
+                <div>
+                    <p class="account-label">Signed in as</p>
+                    <p class="account-name">{{ request.user.username }}</p>
+                </div>
+            </div>
+
+            <div class="signout-panel">
+                <div>
+                    <h2>Sign out</h2>
+                    <p>End your current session on this device.</p>
+                </div>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="button button-secondary" type="submit">Sign out</button>
+                </form>
+            </div>
+
+            {% if students %}
+            <div class="account-panel">
+                <div>
+                    <p class="account-label">Students</p>
+                    {% for student in students %}
+                        <p class="account-name">{{ student.name }} — {{ student.reg_no }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </section>
+        <footer class="page-footer">College Portal</footer>
+    </main>
+</body>
+</html>

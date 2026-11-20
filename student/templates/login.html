@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Sign in | College Portal</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'student/auth.css' %}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="auth-card" aria-labelledby="page-title">
+            <div class="brand-mark" aria-hidden="true">C</div>
+            <p class="eyebrow">College Portal</p>
+            <h1 id="page-title">Welcome back</h1>
+            <p class="intro">Sign in to continue to your account.</p>
+
+            {% if messages %}
+                <ul class="messages" aria-live="polite">
+                    {% for message in messages %}
+                        <li class="message message-{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-field">
+                    <label for="username">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        autocomplete="username"
+                        placeholder="Your username"
+                        required
+                        autofocus
+                    >
+                </div>
+                <div class="form-field">
+                    <label for="password">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        autocomplete="current-password"
+                        placeholder="Your password"
+                        required
+                    >
+                </div>
+                <button class="button button-primary" type="submit">Sign in</button>
+            </form>
+            <p class="card-footnote"><a href="{% url 'register' %}">Create an account</a></p>
+            <p class="card-footnote">Your account is protected by secure sign-in.</p>
+        </section>
+    </main>
+</body>
+</html>  

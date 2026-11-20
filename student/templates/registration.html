@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Create account | College Portal</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'student/auth.css' %}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="auth-card" aria-labelledby="page-title">
+            <div class="brand-mark" aria-hidden="true">C</div>
+            <p class="eyebrow">College Portal</p>
+            <h1 id="page-title">Create an account</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="button button-primary" type="submit">Create account</button>
+            </form>
+            <p class="card-footnote"><a href="{% url 'login' %}">Already have an account? Sign in</a></p>
+        </section>
+    </main>
+</body>
+</html>

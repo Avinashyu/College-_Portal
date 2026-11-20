@@ -21,11 +21,14 @@ from student import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/',views.home),
+    path('home/', views.home, name='home'),
     path('about/',views.about),
     path('contact/',views.contact),
-    path('add/',views.forms1,name='add'),
-    path('add-form/',views.student_form_dj,name='add')
-
-
+    path('add/', views.manual_student_form, name='manual_student_form'),
+    path('add-form/', views.student_form, name='student_form'),
+    path('', views.user_login, name='login'),
+    path('register/', views.register, name='register'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('logout/', views.user_logout, name='logout'),
+    path('api/students/', views.student_api, name='student-list'),
 ]
